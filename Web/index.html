@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control del Arduino</title>
+</head>
+<body>
+    <h1>Controlar Arduino vía Web</h1>
+
+    <!-- Campo de texto para que el usuario ingrese la dirección IP -->
+    <label for="ipAddress">Ingrese la IP del Arduino:</label>
+    <input type="text" id="ipAddress" placeholder="192.168.1.x">
+    <br><br>
+
+    <!-- Botones de control -->
+    <button onclick="enviarComando('on')">Encender</button>
+    <button onclick="enviarComando('off')">Apagar</button>
+    
+    <br><br>
+    
+    <!-- Temporizador para enviar comandos con retraso -->
+    <label for="tiempo">Tiempo (en segundos) para apagar:</label>
+    <input type="number" id="tiempo" min="1" placeholder="10">
+    <button onclick="temporizador()">Iniciar Temporizador</button>
+
+    <script>
+        // Función para enviar comandos
+        function enviarComando(comando) {
+            const ip = document.getElementById('ipAddress').value;
+            if (ip === '') {
+                alert('Por favor ingrese la dirección IP del Arduino.');
+                return;
+            }
+
+            // Enviar el comando al Arduino
+            fetch(`http://${ip}/comando/${comando}`, { method: 'GET' })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Función para temporizador
+        function temporizador() {
+            const ip = document.getElementById('ipAddress').value;
+            const tiempo = document.getElementById('tiempo').value;
+            if (ip === '' || tiempo === '') {
+                alert('Por favor ingrese la dirección IP y el tiempo.');
+                return;
+            }
+
+            // Enviar comando de encendido
+            enviarComando('on');
+            
+            // Después de "tiempo" segundos, enviar el comando de apagado
+            setTimeout(() => {
+                enviarComando('off');
+            }, tiempo * 1000); // Convertir a milisegundos
+        }
+    </script>
+</body>
+</html>
