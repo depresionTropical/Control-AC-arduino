@@ -19,3 +19,5 @@ Este proyecto utiliza dos Arduinos para enviar y recibir señales infrarrojas (I
 - Conexión WiFi para el Arduino Nano 33 IoT (para control vía web)
 
 ---
+
+### Esqueme de proyecto
