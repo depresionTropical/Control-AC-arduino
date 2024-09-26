@@ -1,18 +1,4 @@
- /*
-
- * IRremote: IRrecvDump - dump details of IR codes with IRrecv
-
- * An IR detector/demodulator must be connected to the input RECV_PIN.
-
- * Version 0.1 July, 2009
-
- * Copyright 2009 Ken Shirriff
-
- * http://arcfn.com
-
- * http://as3breeze.com/arduino-sending-samsung-ir-codes/
-
- */
+ 
 #define RAW_BUFFER_LENGTH  730
 #define MARK_EXCESS_MICROS    20    // Adapt it to your IR receiver module. 20 is recommended for the cheap VS1838 modules.
 
